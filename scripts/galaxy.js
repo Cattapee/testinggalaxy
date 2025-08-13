@@ -63,7 +63,7 @@ export class Galaxy {
     }
   };
 
-  /* this.stars.forEach(star => {
+   this.stars.forEach(star => {
     const r = Math.sqrt(star.position.x ** 2 + star.position.y ** 2);
     const omega = getAngularVelocity(r) * deltaTime;
     const cos = Math.cos(omega);
@@ -73,7 +73,7 @@ export class Galaxy {
     star.position.x = x * cos - y * sin;
     star.position.y = x * sin + y * cos;
     star.obj.position.copy(star.position);
-  }); */
+  }); 
 
    this.haze.forEach(haze => {
     const r = Math.sqrt(haze.position.x ** 2 + haze.position.y ** 2);
@@ -87,7 +87,7 @@ export class Galaxy {
     haze.obj.position.copy(haze.position);
   }); 
 
-  /* this.nebulae.forEach(nebula => {
+   this.nebulae.forEach(nebula => {
     const r = Math.sqrt(nebula.position.x ** 2 + nebula.position.y ** 2);
     const omega = getAngularVelocity(r) * deltaTime;
     const cos = Math.cos(omega);
@@ -102,7 +102,7 @@ export class Galaxy {
       const spriteY = sprite.position.y;
       sprite.position.x = spriteX * cos - spriteY * sin;
       sprite.position.y = spriteX * sin + spriteY * cos;
-    }); */
+    }); 
   });
 }
 
