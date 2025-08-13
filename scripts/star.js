@@ -4,7 +4,7 @@ import { starTypes } from "../config/starDis.js";
 import { clamp, gaussianRandom } from "./utils.js";
 import { config } from "../config/galaxyConfig.js";
 
-const texture = new THREE.TextureLoader().load("/resources/sprite120.png");
+const texture = new THREE.TextureLoader().load('/testinggalaxy/resources/sprite120.png');
 const material = new THREE.SpriteMaterial({ map: texture, color: "#fff" });
 const materials = starTypes.color.map(
   (color) => new THREE.SpriteMaterial({ map: texture, color: color })
