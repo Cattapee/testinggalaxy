@@ -8,7 +8,7 @@ import { clamp } from "./utils.js";
 import * as THREE from "three";
 import { config } from "../config/galaxyConfig.js";
 
-const nebulaTexture = new THREE.TextureLoader().load(new URL('../resources/sprite120.png', import.meta.url).href);
+const nebulaTexture = new THREE.TextureLoader().load(new URL('./resources/sprite120.png', import.meta.url).href);
 const nebulaSprite = new THREE.SpriteMaterial({
   map: nebulaTexture,
   color: 0x00ffff,
