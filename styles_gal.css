@@ -1,0 +1,310 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@font-face {
+  font-family: "MS Gothic";
+  src: url("fonts/msgothic.woff2") format("woff2"),
+    url("fonts/msgothic.woff") format("woff"),
+    url("fonts/msgothic.ttf") format("truetype");
+}
+
+body {
+  font-family: "MS Gothic", Verdana, Helvetica, sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+#canvas {
+  display: block;
+  z-index: 1;
+}
+#controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 320px; /* Fixed width for consistent layout */
+  min-height: 200px; /* Fixed height to prevent shrinking */
+  box-sizing: border-box; /* Prevent content overflow */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3; /* Above canvas */
+}
+#controls.hidden {
+  display: none; /* Toggle visibility */
+}
+#controls h2,
+#controls h3 {
+  margin: 0;
+}
+#controls button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#controls .control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+#controls .control-row label {
+  flex: 1; /* Label takes available space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+#controls .control-row input,
+#controls .control-row select {
+  width: 100px; /* Fixed width for inputs */
+  box-sizing: border-box;
+}
+#drawCanvas {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  transition: left 0.5s ease-in-out;
+  display: none;
+  z-index: 2; /* Above 3D canvas, below controls */
+}
+#drawCanvas.active {
+  left: 0;
+  display: block;
+}
+#drawControls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  z-index: 3; /* Above drawCanvas */
+}
+#drawControls.active {
+  display: block;
+}
+#drawControls button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#drawControls #generateGalaxyButton {
+  background-color: #007bff;
+  color: white;
+}
+#drawControls #generateGalaxyButton:hover {
+  background-color: #0056b3;
+}
+#drawControls #clearCanvasButton {
+  background-color: #dc3545;
+  color: white;
+}
+#drawControls #clearCanvasButton:hover {
+  background-color: #b02a37;
+}
+
+#canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#controls-div p,
+h1,
+h2 {
+  font-family: "MS Gothic", Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#controls-div {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: rgba(46, 45, 45, 0.69);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  z-index: 1;
+  gap: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(48, 48, 48);
+}
+
+#controls-div h1 {
+  color: #4b0082;
+  background-image: linear-gradient(
+    45deg,
+    #4b0082 19%,
+    #6a00a0 30%,
+    #8e00bf 48%,
+    #b200d8 61%,
+    #d600f0 85%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#controls-div a {
+  text-decoration: underline;
+  color: rgb(0, 140, 255);
+  margin-top: -15px;
+  margin-bottom: 1.5vh;
+}
+
+#controls-div p {
+  font-size: 20px;
+}
+
+.controls label {
+  font-weight: bold;
+}
+
+.controls input[type="range"] {
+  width: 100%;
+}
+
+.controls button {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdown-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  margin: 20px;
+  z-index: 9999;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.dropbtn.active .arrow {
+  transform: rotate(-90deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: white;
+  min-width: 250px;
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  overflow-x: hidden;
+
+  /* Animation properties */
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  border-radius: 6px;
+}
+
+.dropdown-content label {
+  display: block;
+  padding: 8px 14px;
+  cursor: default;
+  color: black;
+}
+
+.dropdown-content label:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content input[type="number"] {
+  margin-left: 8px;
+  width: 100px;
+  padding: 4px 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown-content select {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dropdown-content select:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content.show {
+  max-height: 500px; /* plenty for animation */
+  opacity: 1;
+}
+
+.xy-inputs {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.xy-inputs input[type="number"] {
+  width: 70px;
+  padding: 4px 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

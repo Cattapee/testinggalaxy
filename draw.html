@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+    <title>Draw-A-Galaxy</title>
+    <link rel="icon" href="/resources/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles_draw.css" />
+  </head>
+  <body>
+    <div class="drawing-container">
+      <canvas id="drawCanvas"></canvas>
+
+      <div class="controls">
+        <label>
+          Brush Size:
+          <input type="range" id="brushSize" min="1" max="50" value="3" />
+        </label>
+
+        <button id="eraseToggle">Erase: Off</button>
+
+        <button id="clearBtn">Clear Canvas</button>
+        <button id="genbtn">Generate Galaxy</button>
+      </div>
+    </div>
+
+    <script src="scripts/draw.js"></script>
+  </body>
+</html>

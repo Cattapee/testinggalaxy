@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galaxy Simulation</title>
+    <link rel="icon" href="/resources/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles_gal.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="controls">
+      <h2>Controls</h2>
+      <p>Left hold -> Move Camera</p>
+      <p>Right hold -> Pan Camera</p>
+      <p>Scroll Wheel -> Zoom in/out</p>
+      <p>M -> Toggle GUI</p>
+      <button id="drawbtn">Draw Galaxy</button>
+      <button onclick="generateStatic()">Generate Galaxy</button>
+      <button onclick="generateLight()">Lighting Mode</button>
+      <button id="renderRaytrace">Render Raytrace PNG</button>
+      <div id="renderProgress" style="color: white;">0% complete</div>
+      <label
+          for="shader_type"
+          style="padding: 8px 14px; display: block; cursor: pointer"
+        >
+          Select Effect:
+          <select
+            id="shader_type"
+            style="width: 100%; margin-top: 6px; padding: 6px; font-size: 14px"
+          >
+            <option value="composition">Composition (Default)</option>
+            <option value="blackwhite">Black & White</option>
+            <option value="invert">Invert (Fun)</option>
+            <option value="rainbowcycle">Rainbow Cycle</option>
+            <option value="heatmap">Heatmap</option>
+          </select>
+        </label>
+
+      <div class="dropdown-container">
+        <div class="dropdown">
+          <button onclick="toggleMenu('dropdownMenu1')" class="dropbtn">
+            Parameters <span class="arrow">←</span>
+          </button>
+          <div id="dropdownMenu1" class="dropdown-content">
+            <label>
+              Num_Stars:
+              <input
+                id="stars"
+                type="number"
+                min="0"
+                value="3500"
+              />
+            </label>
+
+            <label>
+              Galaxy_Thickness:
+              <input
+                id="thick"
+                type="number"
+                min="0"
+                value="5"
+              />
+            </label>
+
+            <label>
+              Core_Dist:
+              <div class="xy-inputs">
+                <input
+                  id="corex"
+                  type="number"
+                  min="0"
+                  placeholder="X"
+                  aria-label="X value"
+                />
+                <input
+                  id="corey"
+                  type="number"
+                  min="0"
+                  placeholder="Y"
+                  aria-label="Y value"
+                />
+              </div>
+            </label>
+
+            <label>
+              Outer_Core_Dist:
+              <div class="xy-inputs">
+                <input
+                  id="outcorex"
+                  type="number"
+                  min="0"
+                  placeholder="X"
+                  aria-label="X value"
+                />
+                <input
+                  id="outcorey"
+                  type="number"
+                  min="0"
+                  placeholder="Y"
+                  aria-label="Y value"
+                />
+              </div>
+            </label>
+
+            <label>
+              Arm_Dist:
+              <div class="xy-inputs">
+                <input
+                  id="armx"
+                  type="number"
+                  min="0"
+                  placeholder="X"
+                  aria-label="X value"
+                />
+                <input
+                  id="army"
+                  type="number"
+                  min="0"
+                  placeholder="Y"
+                  aria-label="Y vstyles.cssalue"
+                />
+              </div>
+            </label>
+
+            <label>
+              Arm_Mean:
+              <div class="xy-inputs">
+                <input
+                  id="armmx"
+                  type="number"
+                  min="0"
+                  placeholder="X"
+                  aria-label="X value"
+                />
+                <input
+                  id="armmy"
+                  type="number"
+                  min="0"
+                  placeholder="Y"
+                  aria-label="Y value"
+                />
+              </div>
+            </label>
+
+            <label>
+              Spiral:
+              <input
+                id="spiral"
+                type="number"
+                min="0"
+                value="3"
+              />
+            </label>
+
+            <label>
+              Arms:
+              <input
+                id="arms"
+                type="number"
+                min="0"
+                value="2"
+              />
+            </label>
+
+            <label>
+              Bar_dim:
+              <div class="xy-inputs">
+                <input
+                  id="barl"
+                  type="number"
+                  min="0"
+                  placeholder="L"
+                  aria-label="L value"
+                />
+                <input
+                  id="barw"
+                  type="number"
+                  min="0"
+                  placeholder="W"
+                  aria-label="W value"
+                />
+              </div>
+            </label>
+
+            <label>
+              Halo_Rad:
+              <input
+                id="halorad"
+                type="number"
+                min="0"
+                value="300"
+              />
+            </label>
+
+            <label>
+              Halo_Density:
+              <input
+                id="haloden"
+                type="number"
+                min="0"
+                value="0.1"
+              />
+            </label>
+
+            <label>
+              Arm_Pitch:
+              <input
+                id="armpit"
+                type="number"
+                min="0"
+                value="3"
+              />
+            </label>
+
+            <label>
+              Star_Size_Vari:
+              <input
+                id="starvari"
+                type="number"
+                min="0"
+                value="0.3"
+              />
+            </label>
+
+            <label>
+              Nebula_Density:
+              <input
+                id="nebden"
+                type="number"
+                min="0"
+                value="0.05"
+              />
+            </label>
+
+            <label>
+              Nebula_Scale:
+              <div class="xy-inputs">
+                <input
+                  id="nebmin"
+                  type="number"
+                  min="0"
+                  placeholder="min"
+                  aria-label="min value"
+                />
+                <input
+                  id="nebmax"
+                  type="number"
+                  min="0"
+                  placeholder="max"
+                  aria-label="max value"
+                />
+              </div>
+            </label>
+
+            <label>
+              NUM_LIGHTS:
+              <input
+                id="num_lights"
+                type="number"
+                value="20"
+              />
+            </label>
+
+            <label>
+              POINT_LIGHT_INTENSITY:
+              <input
+                id="point_light_intensity"
+                type="number"
+                value="1000"
+              />
+            </label>
+
+            <label>
+              HEMISPHERE_LIGHT_INTENSITY:
+              <input
+                id="hemisphere_light_intensity"
+                type="number"
+                value="5"
+              />
+            </label>
+            <label>
+              ROTATION_DELTA_TIME:
+              <input
+                id="delta_time"
+                type="number"
+                value="0.01"
+              />
+            </label>
+            <label>
+              ROTATION_VELOCITY:
+              <input
+                id="rotation_velocity"
+                type="number"
+                value="5"
+              />
+            </label>
+            <label>
+              BULGE_RADIUS:
+              <input
+                id="bulge_rad"
+                type="number"
+                value="3"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./scripts/main.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+    <script src="./scripts/dropmen.js"></script>
+  </body>
+</html>

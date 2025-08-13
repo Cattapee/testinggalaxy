@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "MS Gothic", Verdana, Helvetica, sans-serif;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@font-face {
+  font-family: "MS Gothic";
+  src: url("fonts/msgothic.woff2") format("woff2"),
+    url("fonts/msgothic.woff") format("woff"),
+    url("fonts/msgothic.ttf") format("truetype");
+}
+
+body {
+  font-family: "MS Gothic", Verdana, Helvetica, sans-serif;
+  background: url("resources/background.gif");
+  background-size: 400% 400%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  /* animation: gradientmove 25s ease infinite; */
+}
+
+.drawing-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+#drawCanvas {
+  border: 3px solid #ffffff;
+  border-radius: 8px;
+  background-color: #000000;
+  cursor: crosshair;
+  width: 130vh;
+  height: 80vh;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 150px;
+}
+
+.controls label {
+  font-weight: bold;
+}
+
+.controls input[type="range"] {
+  width: 100%;
+}
+
+.controls button {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+label {
+  color: white;
+}
+
+
+@keyframes gradientmove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
